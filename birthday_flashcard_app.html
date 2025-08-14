@@ -361,7 +361,7 @@
             <div class="navigation">
                 <button class="nav-btn" id="prevBtn" onclick="prevImage()" disabled>Previous</button>
                 <div class="card-counter">
-                    <span id="currentIndex">1</span> of <span id="totalImages">8</span>
+                    <span id="currentIndex">1</span> of <span id="totalImages">6</span>
                 </div>
                 <button class="nav-btn" id="nextBtn" onclick="nextImage()">Next</button>
             </div>
@@ -404,31 +404,46 @@
 
         // Carousel functionality
         let currentImageIndex = 0;
-        const totalImages = 8; // You can change this number based on how many images you have
+        const totalImages = 6; // Updated to match the number of images you provided
         
-        // Placeholder image descriptions (you can customize these)
-        const imageDescriptions = [
-            "Memory #1 - Replace with your first special moment",
-            "Memory #2 - Replace with your second special moment", 
-            "Memory #3 - Replace with your third special moment",
-            "Memory #4 - Replace with your fourth special moment",
-            "Memory #5 - Replace with your fifth special moment",
-            "Memory #6 - Replace with your sixth special moment",
-            "Memory #7 - Replace with your seventh special moment",
-            "Memory #8 - Replace with your eighth special moment"
+        // Image paths and descriptions
+        const images = [
+            {
+                src: "images/image1.jpg", // The First Domain Name
+                alt: "The First Domain Name - 1985"
+            },
+            {
+                src: "images/image2.jpg", // Introduction with Andy's photo
+                alt: "Happy 40th Birthday Andy!"
+            },
+            {
+                src: "images/image3.jpg", // Sour Patch Kids
+                alt: "Sour Patch Kids - Sweet, Sour, and Iconic!"
+            },
+            {
+                src: "images/image4.jpg", // PCR
+                alt: "Polymerase Chain Reaction (PCR) - Revolutionary Science"
+            },
+            {
+                src: "images/image5.jpg", // Tetris
+                alt: "Tetris - Chaos, Color, and Character!"
+            },
+            {
+                src: "images/image6.jpg", // Microsoft Windows 1.0
+                alt: "Microsoft Windows 1.0 - Opening New Windows"
+            }
         ];
 
         function updateDisplay() {
             const cardContent = document.getElementById('cardContent');
-            const imageNumber = document.getElementById('imageNumber');
             const currentIndex = document.getElementById('currentIndex');
             const progressBar = document.getElementById('progressBar');
             
-            // Update card content (replace this with actual images later)
-            cardContent.innerHTML = `<p>📸 ${imageDescriptions[currentImageIndex]}<br><br>Click to replace with your image!</p>`;
+            // Update card content with actual images
+            const currentImage = images[currentImageIndex];
+            cardContent.innerHTML = `<img src="${currentImage.src}" alt="${currentImage.alt}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;">`;
             
             // Update counters
-            imageNumber.textContent = currentImageIndex + 1;
             currentIndex.textContent = currentImageIndex + 1;
             
             // Update progress bar
