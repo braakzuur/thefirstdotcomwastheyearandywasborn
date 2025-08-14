@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 40th Birthday!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .login-form input {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .carousel-header {
+            margin-bottom: 30px;
+        }
+
+        .carousel-header h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder {
+            color: #666;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .card-counter {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Birthday Finale Styles */
+        .birthday-finale {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: celebration 1s ease-out;
+        }
+
+        .birthday-finale h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: colorShift 3s ease-in-out infinite;
+        }
+
+        .birthday-image {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .birthday-message {
+            font-size: 1.5em;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        .restart-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes celebration {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes colorShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .login-container, .carousel-container, .birthday-finale {
+                padding: 20px;
+            }
+            
+            .card {
+                height: 300px;
+            }
+            
+            .birthday-finale h1 {
+                font-size: 2.5em;
+            }
+            
+            .birthday-image {
+                width: 200px;
+                height: 200px;
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Page -->
+        <div id="loginPage" class="login-container">
+            <h1>🎉 Birthday Surprise! 🎉</h1>
+            <p style="color: #666; margin-bottom: 30px;">Enter the secret code to see your special memories</p>
+            <form class="login-form" id="loginForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="login-btn">Enter the Celebration</button>
+                <div id="loginError" class="error hidden">Incorrect credentials! Try again.</div>
+            </form>
+            <p style="color: #999; margin-top: 20px; font-size: 14px;">Hint: Username: birthday, Password: 40years</p>
+        </div>
+
+        <!-- Carousel Page -->
+        <div id="carouselPage" class="carousel-container hidden">
+            <div class="carousel-header">
+                <h2>Your Memory Lane</h2>
+                <p style="color: #666;">Click the card to see the next memory!</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+            </div>
+            
+            <div class="card" id="currentCard" onclick="nextImage()">
+                <div class="placeholder" id="cardContent">
+                    <p>📸 Memory #<span id="imageNumber">1</span><br><br>Click to replace with your image!</p>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="prevImage()" disabled>Previous</button>
+                <div class="card-counter">
+                    <span id="currentIndex">1</span> of <span id="totalImages">8</span>
+                </div>
+                <button class="nav-btn" id="nextBtn" onclick="nextImage()">Next</button>
+            </div>
+        </div>
+
+        <!-- Birthday Finale -->
+        <div id="birthdayFinale" class="birthday-finale hidden">
+            <h1>Happy 40th Birthday! 🎂</h1>
+            <div class="birthday-image">
+                🎉
+            </div>
+            <div class="birthday-message">
+                Cheers to 40 amazing years!<br>
+                Here's to many more adventures, laughter, and unforgettable memories ahead.
+                <br><br>
+                You're not getting older, you're getting more awesome! 🌟
+            </div>
+            <button class="restart-btn" onclick="restartCarousel()">View Memories Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'birthday' && password === '40years') {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('carouselPage').classList.remove('hidden');
+                createConfetti();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('loginError').classList.add('hidden');
+                }, 3000);
+            }
+        });
+
+        // Carousel functionality
+        let currentImageIndex = 0;
+        const totalImages = 8; // You can change this number based on how many images you have
+        
+        // Placeholder image descriptions (you can customize these)
+        const imageDescriptions = [
+            "Memory #1 - Replace with your first special moment",
+            "Memory #2 - Replace with your second special moment", 
+            "Memory #3 - Replace with your third special moment",
+            "Memory #4 - Replace with your fourth special moment",
+            "Memory #5 - Replace with your fifth special moment",
+            "Memory #6 - Replace with your sixth special moment",
+            "Memory #7 - Replace with your seventh special moment",
+            "Memory #8 - Replace with your eighth special moment"
+        ];
+
+        function updateDisplay() {
+            const cardContent = document.getElementById('cardContent');
+            const imageNumber = document.getElementById('imageNumber');
+            const currentIndex = document.getElementById('currentIndex');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Update card content (replace this with actual images later)
+            cardContent.innerHTML = `<p>📸 ${imageDescriptions[currentImageIndex]}<br><br>Click to replace with your image!</p>`;
+            
+            // Update counters
+            imageNumber.textContent = currentImageIndex + 1;
+            currentIndex.textContent = currentImageIndex + 1;
+            
+            // Update progress bar
+            const progressPercent = ((currentImageIndex + 1) / totalImages) * 100;
+            progressBar.style.width = progressPercent + '%';
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentImageIndex === 0;
+            document.getElementById('nextBtn').disabled = currentImageIndex === totalImages - 1;
+            
+            // Check if we've reached the end
+            if (currentImageIndex === totalImages - 1) {
+                document.getElementById('nextBtn').textContent = 'Finish!';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function nextImage() {
+            if (currentImageIndex < totalImages - 1) {
+                currentImageIndex++;
+                updateDisplay();
+            } else {
+                // Show birthday finale
+                document.getElementById('carouselPage').classList.add('hidden');
+                document.getElementById('birthdayFinale').classList.remove('hidden');
+                createBirthdayConfetti();
+            }
+        }
+
+        function prevImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateDisplay();
+            }
+        }
+
+        function restartCarousel() {
+            currentImageIndex = 0;
+            document.getElementById('birthdayFinale').classList.add('hidden');
+            document.getElementById('carouselPage').classList.remove('hidden');
+            updateDisplay();
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        function createBirthdayConfetti() {
+            createConfetti();
+            // Create extra confetti for the birthday
+            setTimeout(createConfetti, 1000);
+            setTimeout(createConfetti, 2000);
+        }
+
+        // Initialize display
+        document.getElementById('totalImages').textContent = totalImages;
+        updateDisplay();
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('carouselPage').classList.contains('hidden')) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    prevImage();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
