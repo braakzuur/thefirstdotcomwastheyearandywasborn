@@ -134,7 +134,8 @@
             position: relative;
             width: 100%;
             max-width: 600px;
-            height: 400px;
+            min-height: 300px;
+            max-height: 600px;
             margin: 0 auto 30px;
             border-radius: 15px;
             overflow: hidden;
@@ -153,8 +154,10 @@
 
         .card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            max-height: 600px;
+            object-fit: contain;
+            display: block;
         }
 
         .placeholder {
@@ -409,28 +412,28 @@
         // Image paths and descriptions
         const images = [
             {
-                src: "./images/image1.png", // Introduction with Andy's photo
+                src: "./images/image1.png", // The First Domain Name
+                alt: "The First Domain Name - 1985"
+            },
+            {
+                src: "./images/image2.png", // Introduction with Andy's photo
                 alt: "Happy 40th Birthday Andy!"
             },
             {
-                src: "./images/image2.png", // Sour Patch Kids
+                src: "./images/image3.png", // Sour Patch Kids
                 alt: "Sour Patch Kids - Sweet, Sour, and Iconic!"
             },
             {
-                src: "./images/image3.png", // PCR
+                src: "./images/image4.png", // PCR
                 alt: "Polymerase Chain Reaction (PCR) - Revolutionary Science"
             },
             {
-                src: "./images/image4.png", // Tetris
+                src: "./images/image5.png", // Tetris
                 alt: "Tetris - Chaos, Color, and Character!"
             },
             {
-                src: "./images/image5.png", // Microsoft Windows 1.0
+                src: "./images/image6.png", // Microsoft Windows 1.0
                 alt: "Microsoft Windows 1.0 - Opening New Windows"
-            },
-            {
-                src: "./images/image6.png", // The First Domain Name
-                alt: "The First Domain Name - 1985"
             }
         ];
 
@@ -438,10 +441,11 @@
             const cardContent = document.getElementById('cardContent');
             const currentIndex = document.getElementById('currentIndex');
             const progressBar = document.getElementById('progressBar');
+            const card = document.getElementById('currentCard');
             
             // Update card content with actual images
             const currentImage = images[currentImageIndex];
-            cardContent.innerHTML = `<img src="${currentImage.src}" alt="${currentImage.alt}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;">`;
+            cardContent.innerHTML = `<img src="${currentImage.src}" alt="${currentImage.alt}" onload="adjustCardHeight(this)">`;
             
             // Update counters
             currentIndex.textContent = currentImageIndex + 1;
@@ -460,6 +464,20 @@
             } else {
                 document.getElementById('nextBtn').textContent = 'Next';
             }
+        }
+
+        function adjustCardHeight(img) {
+            const card = document.getElementById('currentCard');
+            const aspectRatio = img.naturalWidth / img.naturalHeight;
+            const cardWidth = card.offsetWidth;
+            
+            // Calculate the height needed to maintain aspect ratio
+            let newHeight = cardWidth / aspectRatio;
+            
+            // Set reasonable bounds
+            newHeight = Math.max(300, Math.min(600, newHeight));
+            
+            card.style.height = newHeight + 'px';
         }
 
         function nextImage() {
